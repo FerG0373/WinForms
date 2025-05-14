@@ -8,6 +8,6 @@ namespace dominio
 {
     public class Imagen
     {
-        public string Url { get; set; }
+        public string UrlImagen { get; set; }
     }
 }
