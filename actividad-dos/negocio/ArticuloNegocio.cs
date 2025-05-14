@@ -22,11 +22,10 @@ namespace negocio
                 while(datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    //aux.CodArticulo = (int)datos.Lector["Codigo"];
-                    aux.CodArticulo = datos.Lector.GetInt32(0);
+                    aux.CodArticulo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Precio = (double)datos.Lector["Precio"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
 
                     lista.Add(aux);
                 }
