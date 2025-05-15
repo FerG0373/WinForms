@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace catalog_manager_app
 {
-    public partial class frmPrincipal : Form
+    public partial class frmInicio : Form
     {
-        public frmPrincipal()
+        public frmInicio()
         {
             InitializeComponent();
         }
