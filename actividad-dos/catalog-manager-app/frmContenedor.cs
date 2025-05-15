@@ -21,9 +21,9 @@ namespace catalog_manager_app
 
         private void AbrirFrmInicio()
         {
-            frmInicio ventanaDos = new frmInicio();
-            ventanaDos.MdiParent = this;
-            ventanaDos.Show();
+            frmInicio ventanaInicio = new frmInicio();
+            ventanaInicio.MdiParent = this;
+            ventanaInicio.Show();
         }
     }
 }
