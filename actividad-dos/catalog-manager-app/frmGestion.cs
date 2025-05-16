@@ -25,13 +25,31 @@ namespace catalog_manager_app
             ArticuloNegocio negocio = new ArticuloNegocio();
             listaArticulos = negocio.listarArticulos();
             dgvArticulos.DataSource = listaArticulos;
-            pbxArticulo.Load(listaArticulos[0].UrlImagen);
+            dgvArticulos.Columns["UrlImagen"].Visible = false;
+            cargarImagen(listaArticulos[0].UrlImagen);
         }
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            pbxArticulo.Load(articuloSeleccionado.UrlImagen);
+            cargarImagen(articuloSeleccionado.UrlImagen);
+        }
+        private void cargarImagen(string Image)
+        {
+            try
+            {
+                pbxArticulo.Load(Image);
+            }
+            catch (Exception ex)
+            {
+                pbxArticulo.Load("https://www.google.com/url?sa=i&url=https%3A%2F%2Fdevelopers.elementor.com%2Fdocs%2Fhooks%2Fplaceholder-image%2F&psig=AOvVaw2CcELMfTYpQrlKNK3TvNmU&ust=1747500145917000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPD-usu3qI0DFQAAAAAdAAAAABAE");
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAgregarArticulo agregar = new frmAgregarArticulo();
+            agregar.ShowDialog();
         }
     }
 }
