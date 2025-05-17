@@ -30,9 +30,12 @@ namespace negocio
                     aux.Categoria = new Categoria();
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];                    
                     aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2); //Se agregó un método para redondear y mostrar solo dos decimales.
-                    aux.UrlImagen = new Imagen();
-                    aux.UrlImagen.UrlImagen = (string)datos.Lector["ImagenUrl"];
-                    //aux.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    aux.UrlImagen = new List<Imagen>();
+                    Imagen imagen = new Imagen();
+                    imagen.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                    aux.UrlImagen.Add(imagen);
+                    //aux.UrlImagen.UrlImagen = (string)datos.Lector["ImagenUrl"];                    
+
 
                     lista.Add(aux);
                 }
