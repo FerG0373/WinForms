@@ -25,7 +25,8 @@ namespace catalog_manager_app
             ArticuloNegocio negocio = new ArticuloNegocio();
             listaArticulos = negocio.listarArticulos();
             dgvArticulos.DataSource = listaArticulos;
-            dgvArticulos.Columns["UrlImagen"].Visible = false;
+            dgvArticulos.Columns["Id"].Visible = false;  //Oculta el campo Id en el Grid.
+            dgvArticulos.Columns["UrlImagen"].Visible = false; //Oculta el campo UrlImagen en el Grid.
             cargarImagen(listaArticulos[0].UrlImagen);
         }
 
@@ -35,11 +36,11 @@ namespace catalog_manager_app
             cargarImagen(articuloSeleccionado.UrlImagen);
         }
 
-        private void cargarImagen(string imagen)
+        private void cargarImagen(Imagen imagen)
         {
             try
             {
-                pbxArticulo.Load(imagen);
+                pbxArticulo.Load(imagen.UrlImagen);
             }
             catch (Exception ex)
             {

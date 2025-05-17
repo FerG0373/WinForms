@@ -40,8 +40,8 @@ namespace catalog_manager_app
                 articulo.Descripcion = txtDescripcion.Text;
                 //articulo.Marca = txtMarca.Text;
                 //articulo.Categoria = txtCategoria.Text;
-                articulo.Precio = decimal.Parse(txtPrecio.Text);
-                articulo.UrlImagen = txtUrlImagen.Text;
+                //articulo.Precio = decimal.Parse(txtPrecio.Text);
+               //articulo.UrlImagen = txtUrlImagen.Text;
 
                 negocio.agregar(articulo);
                 MessageBox.Show("Articulo agregado correctamente");

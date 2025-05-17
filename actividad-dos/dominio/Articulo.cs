@@ -21,6 +21,6 @@ namespace dominio
         [DisplayName("Categoría")]
         public Categoria Categoria { get; set; } //Relación 1 a 1 con categorías.
         public decimal Precio { get; set; }
-        public string UrlImagen { get; set; } //Relación 1 a Muchos con las imágenes.
+        public Imagen UrlImagen { get; set; } //Relación 1 a Muchos con imágenes.
     }
 }
