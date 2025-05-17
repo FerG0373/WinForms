@@ -16,7 +16,13 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("SELECT Codigo, Nombre, A.Descripcion, C.Descripcion AS Categoria, M.Descripcion AS Marca, Precio, ImagenUrl FROM ARTICULOS A, IMAGENES I, CATEGORIAS C, MARCAS M WHERE A.Id = I.Id AND A.IdMarca = M.Id AND A.IdCategoria = C.Id");
+                datos.setearConsulta(
+                    "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca, Precio " +
+                    "FROM ARTICULOS A " + 
+                    "LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id " +
+                    "LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id " + 
+                    "LEFT JOIN MARCAS M ON A.IdMarca = M.Id"
+                    );
                 datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
@@ -34,8 +40,6 @@ namespace negocio
                     Imagen imagen = new Imagen();
                     imagen.UrlImagen = (string)datos.Lector["ImagenUrl"];
                     aux.UrlImagen.Add(imagen);
-                    //aux.UrlImagen.UrlImagen = (string)datos.Lector["ImagenUrl"];                    
-
 
                     lista.Add(aux);
                 }
@@ -52,29 +56,30 @@ namespace negocio
             }
         }
 
-        public void agregar(Articulo nuevo)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
-                datos.setearParametro("@codigo", nuevo.CodArticulo);
-                datos.setearParametro("@nombre", nuevo.Nombre);
-                datos.setearParametro("@descripcion", nuevo.Descripcion);
-                datos.setearParametro("@idMarca", nuevo.Marca);
-                datos.setearParametro("@idCategoria", nuevo.Categoria);
-                datos.setearParametro("@precio", nuevo.Precio);
-                datos.ejecutarLectura();
-                nuevo.CodArticulo = (string)datos.Lector["Codigo"];
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+        //public void agregar(Articulo nuevo)
+        //{
+        //    AccesoDatos datos = new AccesoDatos();
+        //    try
+        //    {
+        //        datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
+        //        datos.setearParametro("@codigo", nuevo.CodArticulo);
+        //        datos.setearParametro("@nombre", nuevo.Nombre);
+        //        datos.setearParametro("@descripcion", nuevo.Descripcion);
+        //        datos.setearParametro("@idMarca", nuevo.Marca);
+        //        datos.setearParametro("@idCategoria", nuevo.Categoria);
+        //        datos.setearParametro("@precio", nuevo.Precio);
+        //        datos.ejecutarLectura();
+        //        nuevo.CodArticulo = (string)datos.Lector["Codigo"];
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        datos.cerrarConexion();
+        //    }
+        //}
+
     }
 }

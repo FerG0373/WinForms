@@ -28,26 +28,28 @@ namespace catalog_manager_app
             listaArticulos = negocio.listarArticulos();
             dgvArticulos.DataSource = listaArticulos;
             dgvArticulos.Columns["Id"].Visible = false;  //Oculta el campo Id en el Grid.
-            cargarImagen(listaArticulos[0].UrlImagen[0]);
+            cargarImagenes(listaArticulos[0].UrlImagen); //Lista de imágenes del primer artículo.
         }
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(articuloSeleccionado.UrlImagen[0]);
+            cargarImagenes(articuloSeleccionado.UrlImagen);
+            indiceImagenActual = 0; //Reinicia el índice al cambiar de fila.
         }
 
-        private void cargarImagen(Imagen imagen)
+        private void cargarImagenes(List<Imagen> imagenes)
         {
             try
             {
-                pbxArticulo.Load(imagen.UrlImagen);
+                pbxArticulo.Load(imagenes[indiceImagenActual].UrlImagen);
             }
             catch (Exception)
             {
                 pbxArticulo.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
             }
         }
+
         private void btnSiguienteImg_Click(object sender, EventArgs e)
         {
             if (dgvArticulos.CurrentRow != null)
@@ -60,7 +62,7 @@ namespace catalog_manager_app
                     indiceImagenActual = (indiceImagenActual + 1) % articuloSeleccionado.UrlImagen.Count;
 
                     // Carga la nueva imagen en el PictureBox.
-                    cargarImagen(articuloSeleccionado.UrlImagen[indiceImagenActual]);
+                    cargarImagenes(articuloSeleccionado.UrlImagen);
                 }
             }
         }

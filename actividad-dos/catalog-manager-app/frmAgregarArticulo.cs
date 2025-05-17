@@ -29,29 +29,29 @@ namespace catalog_manager_app
             Close();
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
-            Articulo articulo = new Articulo();
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            try
-            {
-                articulo.CodArticulo = txtCodigo.Text;
-                articulo.Nombre = txtNombre.Text;
-                articulo.Descripcion = txtDescripcion.Text;
-                //articulo.Marca = txtMarca.Text;
-                //articulo.Categoria = txtCategoria.Text;
-                //articulo.Precio = decimal.Parse(txtPrecio.Text);
-               //articulo.UrlImagen = txtUrlImagen.Text;
+        //private void btnAceptar_Click(object sender, EventArgs e)
+        //{
+        //    Articulo articulo = new Articulo();
+        //    ArticuloNegocio negocio = new ArticuloNegocio();
+        //    try
+        //    {
+        //        articulo.CodArticulo = txtCodigo.Text;
+        //        articulo.Nombre = txtNombre.Text;
+        //        articulo.Descripcion = txtDescripcion.Text;
+        //        //articulo.Marca = txtMarca.Text;
+        //        //articulo.Categoria = txtCategoria.Text;
+        //        //articulo.Precio = decimal.Parse(txtPrecio.Text);
+        //       //articulo.UrlImagen = txtUrlImagen.Text;
 
-                negocio.agregar(articulo);
-                MessageBox.Show("Articulo agregado correctamente");
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+        //        negocio.agregar(articulo);
+        //        MessageBox.Show("Articulo agregado correctamente");
+        //        Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //}
 
         private void frmAgregarArticulo_Load(object sender, EventArgs e)
         {
