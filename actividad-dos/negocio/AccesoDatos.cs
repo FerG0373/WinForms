@@ -23,13 +23,18 @@ namespace negocio
             comando = new SqlCommand();
         }
 
-        public void setConsulta(string consulta)
+        public void setearConsulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
 
-        public void ejecutarLecutra()
+        public void setearParametro(string nombre, object valor)
+        {
+            comando.Parameters.AddWithValue(nombre, valor);
+        }
+
+        public void ejecutarLectura()
         {
             comando.Connection = conexion;
             try
@@ -50,11 +55,6 @@ namespace negocio
                 lector.Close();
             }
             conexion.Close();
-        }
-
-        public void setearParametro(string nombre, object valor)
-        {
-            comando.Parameters.AddWithValue(nombre, valor);
         }
 
     }

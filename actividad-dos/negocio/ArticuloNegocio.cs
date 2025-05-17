@@ -16,8 +16,8 @@ namespace negocio
 
             try
             {
-                datos.setConsulta("SELECT Codigo, Nombre, A.Descripcion, M.Descripcion as Marca, C.Descripcion as Categoria, Precio, ImagenUrl FROM ARTICULOS A, IMAGENES I, CATEGORIAS C, MARCAS M WHERE A.Id = I.Id AND A.IdMarca = M.Id AND A.IdCategoria = C.Id");
-                datos.ejecutarLecutra();
+                datos.setearConsulta("SELECT Codigo, Nombre, A.Descripcion, M.Descripcion AS Marca, C.Descripcion AS Categoria, Precio, ImagenUrl FROM ARTICULOS A, IMAGENES I, CATEGORIAS C, MARCAS M WHERE A.Id = I.Id AND A.IdMarca = M.Id AND A.IdCategoria = C.Id");
+                datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
                 {
@@ -25,8 +25,8 @@ namespace negocio
                     aux.CodArticulo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Categoria = (int)datos.Lector["Categoria"];
-                    aux.Marca = (int)datos.Lector["Marca"];
+                    aux.Marca = (string)datos.Lector["Marca"];
+                    aux.Categoria = (string)datos.Lector["Categoria"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
                     aux.UrlImagen = (string)datos.Lector["ImagenUrl"];
 
@@ -50,14 +50,14 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
+                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
                 datos.setearParametro("@codigo", nuevo.CodArticulo);
                 datos.setearParametro("@nombre", nuevo.Nombre);
                 datos.setearParametro("@descripcion", nuevo.Descripcion);
                 datos.setearParametro("@idMarca", nuevo.Marca);
                 datos.setearParametro("@idCategoria", nuevo.Categoria);
                 datos.setearParametro("@precio", nuevo.Precio);
-                datos.ejecutarLecutra();
+                datos.ejecutarLectura();
                 nuevo.CodArticulo = (string)datos.Lector["Codigo"];
             }
             catch (Exception ex)

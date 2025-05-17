@@ -38,8 +38,8 @@ namespace catalog_manager_app
                 articulo.CodArticulo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                articulo.Marca = txtMarca.Text;
-                articulo.Categoria = txtCategoria.Text;
+                //articulo.Marca = txtMarca.Text;
+                //articulo.Categoria = txtCategoria.Text;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
                 articulo.UrlImagen = txtUrlImagen.Text;
 

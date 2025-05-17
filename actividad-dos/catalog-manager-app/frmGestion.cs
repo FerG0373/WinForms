@@ -42,7 +42,7 @@ namespace catalog_manager_app
             }
             catch (Exception ex)
             {
-                pbxArticulo.Load("https://www.google.com/url?sa=i&url=https%3A%2F%2Fdevelopers.elementor.com%2Fdocs%2Fhooks%2Fplaceholder-image%2F&psig=AOvVaw2CcELMfTYpQrlKNK3TvNmU&ust=1747500145917000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPD-usu3qI0DFQAAAAAdAAAAABAE");
+                pbxArticulo.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
             }
         }
 

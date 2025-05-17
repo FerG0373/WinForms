@@ -32,8 +32,8 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.lblMarca = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblCategoria = new System.Windows.Forms.Label();
+            this.lblPrecio = new System.Windows.Forms.Label();
             this.lblUrlImagen = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -82,23 +82,23 @@
             this.lblMarca.TabIndex = 3;
             this.lblMarca.Text = "Marca:";
             // 
-            // label5
+            // lblCategoria
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(51, 132);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Categoría:";
+            this.lblCategoria.AutoSize = true;
+            this.lblCategoria.Location = new System.Drawing.Point(51, 132);
+            this.lblCategoria.Name = "lblCategoria";
+            this.lblCategoria.Size = new System.Drawing.Size(57, 13);
+            this.lblCategoria.TabIndex = 4;
+            this.lblCategoria.Text = "Categoría:";
             // 
-            // label6
+            // lblPrecio
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(68, 160);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Precio:";
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(68, 160);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
+            this.lblPrecio.TabIndex = 5;
+            this.lblPrecio.Text = "Precio:";
             // 
             // lblUrlImagen
             // 
@@ -196,8 +196,8 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblUrlImagen);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblPrecio);
+            this.Controls.Add(this.lblCategoria);
             this.Controls.Add(this.lblMarca);
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblNombre);
@@ -216,8 +216,8 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblDescripcion;
         private System.Windows.Forms.Label lblMarca;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblCategoria;
+        private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.Label lblUrlImagen;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
