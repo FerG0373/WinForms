@@ -12,10 +12,10 @@ using negocio;
 
 namespace catalog_manager_app
 {
-    public partial class frmGestion : Form
+    public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulos;
-        public frmGestion()
+        public frmArticulos()
         {
             InitializeComponent();
         }
@@ -34,11 +34,12 @@ namespace catalog_manager_app
             Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             cargarImagen(articuloSeleccionado.UrlImagen);
         }
-        private void cargarImagen(string Image)
+
+        private void cargarImagen(string imagen)
         {
             try
             {
-                pbxArticulo.Load(Image);
+                pbxArticulo.Load(imagen);
             }
             catch (Exception ex)
             {

@@ -19,7 +19,7 @@ namespace catalog_manager_app
 
         private void btnEmpezar_Click(object sender, EventArgs e)
         {
-            frmGestion ventanaGestion = new frmGestion();
+            frmArticulos ventanaGestion = new frmArticulos();
             ventanaGestion.Show();
         }
     }
