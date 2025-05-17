@@ -24,11 +24,23 @@ namespace catalog_manager_app
 
         private void frmGestion_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulos = negocio.listarArticulos();
-            dgvArticulos.DataSource = listaArticulos;
-            dgvArticulos.Columns["Id"].Visible = false;  //Oculta el campo Id en el Grid.
-            cargarImagenes(listaArticulos[0].UrlImagen); //Lista de imágenes del primer artículo.
+            cargarDatos();
+        }
+
+        private void cargarDatos()
+        {
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                listaArticulos = negocio.listarArticulos();
+                dgvArticulos.DataSource = listaArticulos;
+                dgvArticulos.Columns["Id"].Visible = false;  //Oculta el campo Id en el Grid.
+                cargarImagenes(listaArticulos[0].UrlImagen); //Lista de imágenes del primer artículo.
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
