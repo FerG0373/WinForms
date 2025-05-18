@@ -33,9 +33,9 @@ namespace catalog_manager_app
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 listaArticulos = negocio.listarArticulos();
                 dgvArticulos.DataSource = listaArticulos;
-                dgvArticulos.Columns["Id"].Visible = false;  //Oculta el campo Id en el Grid.
-                cargarImagenes(listaArticulos[0].UrlImagen); //Lista de imágenes del primer artículo.
-                dgvArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvArticulos.Columns["Id"].Visible = false;  // Oculta el campo Id en el Grid.
+                cargarImagenes(listaArticulos[0].UrlImagen); // Lista de imágenes del primer artículo.
+                dgvArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Adapta el tamaño de las columnas al DataGridView
             }
             catch (Exception ex)
             {

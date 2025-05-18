@@ -61,8 +61,11 @@ namespace catalog_manager_app
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             try
             {
+                cboCategoria.DataSource = categoriaNegocio.listarCategorias();
+                cboMarca.DataSource = marcaNegocio.listarMarcas();
+
                 //Es un modificar artículo.
-                if(articulo != null)
+                if (articulo != null)
                 {
 
                 }

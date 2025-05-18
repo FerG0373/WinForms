@@ -11,7 +11,7 @@ namespace negocio
     {
         public List<Categoria> listarCategorias()
         {
-            List<Categoria> categorias = new List<Categoria>();
+            List<Categoria> listaCategorias = new List<Categoria>();
             AccesoDatos datos = new AccesoDatos();
 
             try
@@ -25,21 +25,19 @@ namespace negocio
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 
-                    listarCategorias().Add(aux);
+                    listaCategorias.Add(aux);
                 }
 
-                return listarCategorias();
+                return listaCategorias;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
-
 
         }
     }
