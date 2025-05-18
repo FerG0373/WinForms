@@ -34,11 +34,13 @@ namespace catalog_manager_app
 
             try
             {
-                articulo.CodArticulo = (string)txtCodigo.Text;
-                articulo.Nombre = (string)txtNombre.Text;
-                articulo.Descripcion = (string)txtDescripcion.Text;
-                //articulo.Categoria = (Categoria);
-                //articulo.Marca = (Marca);
+                articulo.CodArticulo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                articulo.Marca = (Marca)cboMarca.SelectedItem;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                //articulo.UrlImagen = txtUrlImagen.Text;
 
                 negocio.agregarArticulo(articulo);
                 MessageBox.Show("Artículo agregado con éxito.");

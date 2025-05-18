@@ -133,21 +133,21 @@
             // 
             this.txtCodigo.Location = new System.Drawing.Point(114, 27);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(100, 20);
+            this.txtCodigo.Size = new System.Drawing.Size(146, 20);
             this.txtCodigo.TabIndex = 9;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(114, 51);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.Size = new System.Drawing.Size(146, 20);
             this.txtNombre.TabIndex = 10;
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(114, 76);
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(100, 20);
+            this.txtDescripcion.Size = new System.Drawing.Size(146, 20);
             this.txtDescripcion.TabIndex = 11;
             // 
             // cboMarca
@@ -156,7 +156,7 @@
             this.cboMarca.FormattingEnabled = true;
             this.cboMarca.Location = new System.Drawing.Point(114, 129);
             this.cboMarca.Name = "cboMarca";
-            this.cboMarca.Size = new System.Drawing.Size(100, 21);
+            this.cboMarca.Size = new System.Drawing.Size(146, 21);
             this.cboMarca.TabIndex = 12;
             // 
             // cboCategoria
@@ -165,21 +165,21 @@
             this.cboCategoria.FormattingEnabled = true;
             this.cboCategoria.Location = new System.Drawing.Point(114, 102);
             this.cboCategoria.Name = "cboCategoria";
-            this.cboCategoria.Size = new System.Drawing.Size(100, 21);
+            this.cboCategoria.Size = new System.Drawing.Size(146, 21);
             this.cboCategoria.TabIndex = 13;
             // 
             // txtUrlImagen
             // 
             this.txtUrlImagen.Location = new System.Drawing.Point(114, 182);
             this.txtUrlImagen.Name = "txtUrlImagen";
-            this.txtUrlImagen.Size = new System.Drawing.Size(99, 20);
+            this.txtUrlImagen.Size = new System.Drawing.Size(146, 20);
             this.txtUrlImagen.TabIndex = 15;
             // 
             // txtPrecio
             // 
             this.txtPrecio.Location = new System.Drawing.Point(114, 156);
             this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(100, 20);
+            this.txtPrecio.Size = new System.Drawing.Size(146, 20);
             this.txtPrecio.TabIndex = 16;
             // 
             // frmAgregarArticulo

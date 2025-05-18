@@ -23,8 +23,8 @@ namespace negocio
                         "A.Nombre, " +
                         "A.Descripcion, " +
                         "I.ImagenUrl, " +
-                        "ISNULL(C.Descripcion,'No Disponible') Categoria, " +
-                        "ISNULL(M.Descripcion,'No disponible') Marca, " +
+                        "C.Descripcion Categoria, " +
+                        "M.Descripcion Marca, " +
                         "Precio " +
                     "FROM " +
                         "ARTICULOS A " +
@@ -42,7 +42,12 @@ namespace negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Categoria = new Categoria();
-                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];                    
+
+                    if (!(datos.Lector["Categoria"] is DBNull))
+                        aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    else
+                        aux.Categoria.Descripcion = "";
+                    
                     aux.Marca = new Marca();
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2); //Se agregó un método para redondear y mostrar solo dos decimales.
@@ -72,7 +77,16 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("");
+                datos.setearConsulta(
+                    "INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
+                    "VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)"
+                    );
+                datos.setearParametro("@codigo", articulo.CodArticulo);
+                datos.setearParametro("@nombre", articulo.Nombre);
+                datos.setearParametro("@descripcion", articulo.Descripcion);
+                datos.setearParametro("@idMarca", articulo.Marca.Id);
+                datos.setearParametro("@idCategoria", articulo.Categoria.Id);
+                datos.setearParametro("@precio", articulo.Precio);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
