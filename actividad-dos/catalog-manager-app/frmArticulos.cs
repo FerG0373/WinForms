@@ -15,7 +15,7 @@ namespace catalog_manager_app
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulos;
-        private int indiceImagenActual = 0;
+        //private int indiceImagenActual = 0;
 
         public frmArticulos()
         {
@@ -36,6 +36,7 @@ namespace catalog_manager_app
                 dgvArticulos.DataSource = listaArticulos;
                 dgvArticulos.Columns["Id"].Visible = false;  //Oculta el campo Id en el Grid.
                 cargarImagenes(listaArticulos[0].UrlImagen); //Lista de imágenes del primer artículo.
+                dgvArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             catch (Exception ex)
             {
@@ -47,35 +48,18 @@ namespace catalog_manager_app
         {
             Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             cargarImagenes(articuloSeleccionado.UrlImagen);
-            indiceImagenActual = 0; //Reinicia el índice al cambiar de fila.
+            //indiceImagenActual = 0; //Reinicia el índice al cambiar de fila.
         }
 
         private void cargarImagenes(List<Imagen> imagenes)
         {
             try
             {
-                pbxArticulo.Load(imagenes[indiceImagenActual].UrlImagen);
+                pbxArticulo.Load(imagenes[0].UrlImagen);
             }
             catch (Exception)
             {
                 pbxArticulo.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
-            }
-        }
-
-        private void btnSiguienteImg_Click(object sender, EventArgs e)
-        {
-            if (dgvArticulos.CurrentRow != null)
-            {
-                Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-
-                if (articuloSeleccionado.UrlImagen != null && articuloSeleccionado.UrlImagen.Count > 0)
-                {
-                    // Incrementa el índice y asegúrate de que no exceda la cantidad de imágenes.
-                    indiceImagenActual = (indiceImagenActual + 1) % articuloSeleccionado.UrlImagen.Count;
-
-                    // Carga la nueva imagen en el PictureBox.
-                    cargarImagenes(articuloSeleccionado.UrlImagen);
-                }
             }
         }
 

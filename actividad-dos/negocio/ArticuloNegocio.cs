@@ -17,12 +17,22 @@ namespace negocio
             try
             {
                 datos.setearConsulta(
-                    "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca, Precio " +
-                    "FROM ARTICULOS A " + 
-                    "LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id " +
-                    "LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id " + 
-                    "LEFT JOIN MARCAS M ON A.IdMarca = M.Id"
-                    );
+                    "SELECT " +
+                        "A.Id, " +
+                        "A.Codigo, " +
+                        "A.Nombre, " +
+                        "A.Descripcion, " +
+                        "I.ImagenUrl, " +
+                        "ISNULL(C.Descripcion,'No Disponible') Categoria, " +
+                        "ISNULL(M.Descripcion,'No disponible') Marca, " +
+                        "Precio " +
+                    "FROM " +
+                        "ARTICULOS A " +
+                        "LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id " +
+                        "LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id " +
+                        "LEFT JOIN MARCAS M ON A.IdMarca = M.Id;"
+                );
+
                 datos.ejecutarLectura();
 
                 while(datos.Lector.Read())
