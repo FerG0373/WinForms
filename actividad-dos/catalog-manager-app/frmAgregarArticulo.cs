@@ -14,57 +14,64 @@ namespace catalog_manager_app
 {
     public partial class frmAgregarArticulo : Form
     {
+        private Articulo articulo = null;
+
         public frmAgregarArticulo()
         {
             InitializeComponent();
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        public frmAgregarArticulo(Articulo articulo)
         {
-
+            InitializeComponent();
+            this.articulo = articulo;
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Close();
-        }
+            Articulo articulo = new Articulo();
+            ArticuloNegocio negocio = new ArticuloNegocio();
 
-        //private void btnAceptar_Click(object sender, EventArgs e)
-        //{
-        //    Articulo articulo = new Articulo();
-        //    ArticuloNegocio negocio = new ArticuloNegocio();
-        //    try
-        //    {
-        //        articulo.CodArticulo = txtCodigo.Text;
-        //        articulo.Nombre = txtNombre.Text;
-        //        articulo.Descripcion = txtDescripcion.Text;
-        //        //articulo.Marca = txtMarca.Text;
-        //        //articulo.Categoria = txtCategoria.Text;
-        //        //articulo.Precio = decimal.Parse(txtPrecio.Text);
-        //       //articulo.UrlImagen = txtUrlImagen.Text;
-
-        //        negocio.agregar(articulo);
-        //        MessageBox.Show("Articulo agregado correctamente");
-        //        Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //}
-
-        private void frmAgregarArticulo_Load(object sender, EventArgs e)
-        {
-            MarcaNegocio marcaNegocio = new MarcaNegocio();
-            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             try
             {
+                articulo.CodArticulo = (string)txtCodigo.Text;
+                articulo.Nombre = (string)txtNombre.Text;
+                articulo.Descripcion = (string)txtDescripcion.Text;
+                //articulo.Categoria = (Categoria);
+                //articulo.Marca = (Marca);
 
+                negocio.agregarArticulo(articulo);
+                MessageBox.Show("Artículo agregado con éxito.");
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }        
+
+        private void frmAgregarArticulo_Load(object sender, EventArgs e)
+        {            
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            try
+            {
+                //Es un modificar artículo.
+                if(articulo != null)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        
     }
 }

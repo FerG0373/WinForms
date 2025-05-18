@@ -7,7 +7,7 @@ using dominio;
 
 namespace negocio
 {
-    internal class ImagenNegocio
+    public class ImagenNegocio
     {
         public List<Imagen> listarImagenes()
         {

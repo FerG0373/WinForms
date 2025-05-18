@@ -15,14 +15,13 @@ namespace catalog_manager_app
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulos;
-        //private int indiceImagenActual = 0;
 
         public frmArticulos()
         {
             InitializeComponent();
         }
-
-        private void frmGestion_Load(object sender, EventArgs e)
+        
+        private void frmArticulos_Load(object sender, EventArgs e)
         {
             cargarDatos();
         }
@@ -48,7 +47,6 @@ namespace catalog_manager_app
         {
             Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             cargarImagenes(articuloSeleccionado.UrlImagen);
-            //indiceImagenActual = 0; //Reinicia el índice al cambiar de fila.
         }
 
         private void cargarImagenes(List<Imagen> imagenes)
@@ -67,7 +65,17 @@ namespace catalog_manager_app
         {
             frmAgregarArticulo agregar = new frmAgregarArticulo();
             agregar.ShowDialog();
+            cargarDatos();
         }
 
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            frmAgregarArticulo modificar = new frmAgregarArticulo(seleccionado);
+            modificar.ShowDialog();
+            cargarDatos();
+        }
     }
 }

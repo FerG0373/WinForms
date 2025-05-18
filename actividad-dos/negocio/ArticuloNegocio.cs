@@ -41,10 +41,10 @@ namespace negocio
                     aux.CodArticulo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Marca = new Marca();
-                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Categoria = new Categoria();
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];                    
+                    aux.Marca = new Marca();
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2); //Se agregó un método para redondear y mostrar solo dos decimales.
                     aux.UrlImagen = new List<Imagen>();
                     Imagen imagen = new Imagen();
@@ -55,6 +55,25 @@ namespace negocio
                 }
 
                 return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregarArticulo(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("");
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {

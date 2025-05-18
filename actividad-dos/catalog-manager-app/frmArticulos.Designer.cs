@@ -37,6 +37,7 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnSiguienteImg = new System.Windows.Forms.Button();
             this.btnAnteriorImg = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -122,11 +123,22 @@
             this.btnAnteriorImg.Text = "<";
             this.btnAnteriorImg.UseVisualStyleBackColor = true;
             // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(170, 301);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 6;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
             // frmArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1243, 395);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAnteriorImg);
             this.Controls.Add(this.btnSiguienteImg);
             this.Controls.Add(this.btnAgregar);
@@ -137,7 +149,7 @@
             this.Name = "frmArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Artículos";
-            this.Load += new System.EventHandler(this.frmGestion_Load);
+            this.Load += new System.EventHandler(this.frmArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -158,5 +170,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnSiguienteImg;
         private System.Windows.Forms.Button btnAnteriorImg;
+        private System.Windows.Forms.Button btnModificar;
     }
 }
