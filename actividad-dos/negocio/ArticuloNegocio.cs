@@ -25,7 +25,9 @@ namespace negocio
                         "I.ImagenUrl, " +
                         "C.Descripcion Categoria, " +
                         "M.Descripcion Marca, " +
-                        "Precio " +
+                        "Precio, " +
+                        "A.IdMarca, " +
+                        "A.IdCategoria " +
                     "FROM " +
                         "ARTICULOS A " +
                         "LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id " +
@@ -42,6 +44,7 @@ namespace negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
 
                     if (!(datos.Lector["Categoria"] is DBNull))
                         aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
@@ -49,6 +52,7 @@ namespace negocio
                         aux.Categoria.Descripcion = "";
                     
                     aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2); // Redondea y muestra solo dos decimales.
                     aux.UrlImagen = new List<Imagen>();
@@ -103,31 +107,5 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
-        //public void agregar(Articulo nuevo)
-        //{
-        //    AccesoDatos datos = new AccesoDatos();
-        //    try
-        //    {
-        //        datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio)");
-        //        datos.setearParametro("@codigo", nuevo.CodArticulo);
-        //        datos.setearParametro("@nombre", nuevo.Nombre);
-        //        datos.setearParametro("@descripcion", nuevo.Descripcion);
-        //        datos.setearParametro("@idMarca", nuevo.Marca);
-        //        datos.setearParametro("@idCategoria", nuevo.Categoria);
-        //        datos.setearParametro("@precio", nuevo.Precio);
-        //        datos.ejecutarLectura();
-        //        nuevo.CodArticulo = (string)datos.Lector["Codigo"];
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        datos.cerrarConexion();
-        //    }
-        //}
-
     }
 }
