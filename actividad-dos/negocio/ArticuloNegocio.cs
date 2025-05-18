@@ -50,11 +50,16 @@ namespace negocio
                     
                     aux.Marca = new Marca();
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
-                    aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2); //Se agregó un método para redondear y mostrar solo dos decimales.
+                    aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2); // Redondea y muestra solo dos decimales.
                     aux.UrlImagen = new List<Imagen>();
-                    Imagen imagen = new Imagen();
-                    imagen.UrlImagen = (string)datos.Lector["ImagenUrl"];
-                    aux.UrlImagen.Add(imagen);
+
+                    aux.UrlImagen = new List<Imagen>();
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                    {
+                        Imagen imagen = new Imagen();
+                        imagen.UrlImagen = (string)datos.Lector["ImagenUrl"];
+                        aux.UrlImagen.Add(imagen);
+                    }
 
                     lista.Add(aux);
                 }
