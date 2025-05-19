@@ -25,15 +25,18 @@ namespace catalog_manager_app
         {
             InitializeComponent();
             this.articulo = articulo;
+            Text = "Modificar Artículo";
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo articulo = new Articulo();
             ArticuloNegocio negocio = new ArticuloNegocio();
 
             try
             {
+                if(articulo == null)
+                    articulo = new Articulo();
+
                 articulo.CodArticulo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
@@ -44,8 +47,17 @@ namespace catalog_manager_app
                 articulo.UrlImagen = new List<Imagen>(); // Inicializar la lista
                 articulo.UrlImagen.Add(new Imagen { UrlImagen = txtUrlImagen.Text });
 
-                negocio.agregarArticulo(articulo);
-                MessageBox.Show("Artículo agregado con éxito.");
+                if(articulo.Id != 0)
+                {
+                    negocio.modificarArticulo(articulo);
+                    MessageBox.Show("Artículo modificado con éxito.");
+                }
+                else
+                {
+                    negocio.agregarArticulo(articulo);
+                    MessageBox.Show("Artículo agregado con éxito.");
+                }                    
+
                 Close();
             }
             catch (Exception ex)
@@ -60,9 +72,11 @@ namespace catalog_manager_app
         }        
 
         private void frmAgregarArticulo_Load(object sender, EventArgs e)
-        {            
+        {
+            KeyPreview = true; // Maneja los eventos del teclado.
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             MarcaNegocio marcaNegocio = new MarcaNegocio();
+
             try
             {
                 cboCategoria.DataSource = categoriaNegocio.listarCategorias();
@@ -84,7 +98,6 @@ namespace catalog_manager_app
                     txtPrecio.Text = articulo.Precio.ToString();
                     txtUrlImagen.Text = articulo.UrlImagen[0].UrlImagen;
                     cargarImagenes(articulo.UrlImagen);
-                    
                 }
             }
             catch (Exception ex)
@@ -113,6 +126,14 @@ namespace catalog_manager_app
             };
 
             cargarImagenes(imagenes);
+        }
+
+        private void frmAgregarArticulo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) // Detecta si se presionó la tecla Esc.
+            {
+                Close();
+            }
         }
     }
 }

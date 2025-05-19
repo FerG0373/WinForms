@@ -25,7 +25,7 @@ namespace negocio
                         "I.ImagenUrl, " +
                         "C.Descripcion Categoria, " +
                         "M.Descripcion Marca, " +
-                        "Precio, " +
+                        "A.Precio, " +
                         "A.IdMarca, " +
                         "A.IdCategoria " +
                     "FROM " +
@@ -40,6 +40,7 @@ namespace negocio
                 while(datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
                     aux.CodArticulo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
@@ -56,8 +57,7 @@ namespace negocio
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2); // Redondea y muestra solo dos decimales.
                     aux.UrlImagen = new List<Imagen>();
-
-                    aux.UrlImagen = new List<Imagen>();
+                    
                     if (!(datos.Lector["ImagenUrl"] is DBNull))
                     {
                         Imagen imagen = new Imagen();
@@ -96,6 +96,45 @@ namespace negocio
                 datos.setearParametro("@idMarca", articulo.Marca.Id);
                 datos.setearParametro("@idCategoria", articulo.Categoria.Id);
                 datos.setearParametro("@precio", articulo.Precio);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificarArticulo(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta
+                    (
+                        "UPDATE ARTICULOS " +
+                        "SET " +
+                            "Codigo = @codigo, " +
+                            "Nombre = @nombre, " +
+                            "Descripcion = @descripcion, " +
+                            "IdMarca = @idMarca, " +
+                            "IdCategoria = @idCategoria, " +
+                            "Precio = @precio " +
+                        "WHERE Id = @id;"
+                    );
+                datos.setearParametro("@codigo", articulo.CodArticulo);
+                datos.setearParametro("@nombre", articulo.Nombre);
+                datos.setearParametro("@descripcion", articulo.Descripcion);
+                datos.setearParametro("@idMarca", articulo.Marca.Id);
+                datos.setearParametro("@idCategoria", articulo.Categoria.Id);
+                datos.setearParametro("@precio", articulo.Precio);
+                datos.setearParametro("@id", articulo.Id);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
