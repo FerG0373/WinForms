@@ -158,6 +158,9 @@
             this.Controls.Add(this.dgvArticulos);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1259, 434);
+            this.MinimumSize = new System.Drawing.Size(1259, 434);
             this.Name = "frmArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Artículos";

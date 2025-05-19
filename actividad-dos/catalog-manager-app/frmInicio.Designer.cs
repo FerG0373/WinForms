@@ -34,6 +34,7 @@
             // 
             // lblBienvenidos
             // 
+            this.lblBienvenidos.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblBienvenidos.AutoSize = true;
             this.lblBienvenidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBienvenidos.Location = new System.Drawing.Point(293, 80);
@@ -44,6 +45,7 @@
             // 
             // btnEmpezar
             // 
+            this.btnEmpezar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEmpezar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnEmpezar.FlatAppearance.BorderSize = 2;
             this.btnEmpezar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -64,7 +66,9 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnEmpezar);
             this.Controls.Add(this.lblBienvenidos);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "frmInicio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio";
             this.ResumeLayout(false);
             this.PerformLayout();
