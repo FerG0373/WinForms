@@ -34,7 +34,7 @@ namespace catalog_manager_app
                 listaArticulos = negocio.listarArticulos();
                 dgvArticulos.DataSource = listaArticulos;
                 dgvArticulos.Columns["Id"].Visible = false;  // Oculta el campo Id en el Grid.
-                cargarImagenes(listaArticulos[0].UrlImagen); // Lista de imágenes del primer artículo.
+                cargarImagenes(listaArticulos[0].Imagen); // Lista de imágenes del primer artículo.
                 dgvArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Adapta el tamaño de las columnas al DataGridView
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace catalog_manager_app
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagenes(articuloSeleccionado.UrlImagen);
+            cargarImagenes(articuloSeleccionado.Imagen);
         }
 
         private void cargarImagenes(List<Imagen> imagenes)
@@ -94,7 +94,6 @@ namespace catalog_manager_app
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
         }

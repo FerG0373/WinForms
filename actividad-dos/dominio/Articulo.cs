@@ -13,7 +13,7 @@ namespace dominio
     {
         public int Id { get; set; }
         [DisplayName("Código")]
-        public string CodArticulo { get; set; }
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }        
@@ -21,6 +21,6 @@ namespace dominio
         public Categoria Categoria { get; set; } //Relación 1 a 1 con categorías.
         public Marca Marca { get; set; } //Relación 1 a 1 con marcas.
         public decimal Precio { get; set; }
-        public List<Imagen> UrlImagen { get; set; } //Relación 1 a Muchos con imágenes.
+        public List<Imagen> Imagen { get; set; } //Relación 1 a Muchos con imágenes.
     }
 }

@@ -37,15 +37,15 @@ namespace catalog_manager_app
                 if(articulo == null)
                     articulo = new Articulo();
 
-                articulo.CodArticulo = txtCodigo.Text;
+                articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
 
-                articulo.UrlImagen = new List<Imagen>(); // Inicializar la lista
-                articulo.UrlImagen.Add(new Imagen { UrlImagen = txtUrlImagen.Text });
+                articulo.Imagen = new List<Imagen>(); // Inicializar la lista
+                articulo.Imagen.Add(new Imagen { UrlImagen = txtUrlImagen.Text });
 
                 if(articulo.Id != 0)
                 {
@@ -90,14 +90,14 @@ namespace catalog_manager_app
                 //Es un modificar artículo.
                 if (articulo != null)
                 {
-                    txtCodigo.Text = articulo.CodArticulo;
+                    txtCodigo.Text = articulo.Codigo;
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
                     cboCategoria.SelectedValue = articulo.Categoria.Id;
                     cboMarca.SelectedValue = articulo.Marca.Id;
                     txtPrecio.Text = articulo.Precio.ToString();
-                    txtUrlImagen.Text = articulo.UrlImagen[0].UrlImagen;
-                    cargarImagenes(articulo.UrlImagen);
+                    //txtUrlImagen.Text = articulo.UrlImagen[0].UrlImagen;
+                    cargarImagenes(articulo.Imagen);
                 }
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace catalog_manager_app
         {
             try
             {
-                pbxArticulo.Load(imagenes[0].UrlImagen);
+                //pbxArticulo.Load(imagenes[0].UrlImagen);
             }
             catch (Exception)
             {
