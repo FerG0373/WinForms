@@ -12,16 +12,13 @@ namespace negocio
         public List<Articulo> listarArticulos()
         {
             List<Articulo> listaArticulos = new List<Articulo>();
+            List<Imagen> listaImagenes = listarImagenes();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
                 datos.setearConsulta(
-                //"SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, C.Descripcion Categoria, M.Descripcion Marca, A.Precio, A.IdCategoria, A.IdMarca " +
-                //"FROM ARTICULOS A, CATEGORIAS C, MARCAS M " +
-                //"WHERE C.Id = A.IdCategoria AND M.Id = A.IdMarca;"
-                //"SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, C.Descripcion Categoria, M.Descripcion Marca, A.Precio, A.IdCategoria, A.IdMarca, I.ImagenUrl FROM ARTICULOS A, CATEGORIAS C, MARCAS M, IMAGENES I WHERE C.Id = A.IdCategoria AND M.Id = A.IdMarca AND I.IdArticulo = A.Id;"
-                "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, C.Descripcion AS Categoria, M.Descripcion AS Marca, A.Precio, A.IdCategoria, A.IdMarca, (SELECT TOP 1 ImagenUrl FROM IMAGENES I WHERE I.IdArticulo = A.Id) AS ImagenUrl FROM ARTICULOS A LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca;"
+                "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, (SELECT C.Descripcion FROM CATEGORIAS C WHERE C.Id = A.IdCategoria) Categoria, (SELECT M.Descripcion FROM MARCAS M WHERE M.Id = A.IdMarca) Marca, A.Precio, A.IdCategoria, A.IdMarca FROM ARTICULOS A;"
                 );
 
                 datos.ejecutarLectura();
@@ -46,17 +43,16 @@ namespace negocio
                     aux.Marca.Id = (int)datos.Lector["IdMarca"]; // Para poder leer y precargar la marca cuando voy a modificar.
                     aux.Marca.Descripcion = (string)datos.Lector["Marca"];
 
-                    aux.Imagen = new List<Imagen>(); // Instancio la lista de imágenes.
-                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                    aux.Imagen = new List<Imagen>(); // Inicializamos la lista de imágenes.
+                    foreach (Imagen img in listaImagenes)
                     {
-                        Imagen imagen = new Imagen(); // Instancio la imagen.
-                        imagen.UrlImagen = (string)datos.Lector["ImagenUrl"];
-                        aux.Imagen.Add(imagen); // Guardo la imagen en la lista de imágenes.
+                        if (img.IdArticulo == aux.Id) // Comprobamos si la imagen corresponde al artículo actual.
+                        {
+                            aux.Imagen.Add(img); // Añadimos la imagen a la lista del artículo.
+                        }
                     }
-
                     listaArticulos.Add(aux);
                 }
-
                 return listaArticulos;
             }
             catch (Exception ex)
@@ -118,6 +114,31 @@ namespace negocio
                 datos.setearParametro("@idMarca", articulo.Marca.Id);
                 datos.setearParametro("@idCategoria", articulo.Categoria.Id);
                 datos.setearParametro("@precio", articulo.Precio);
+
+                datos.ejecutarAccion();                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregarImagen(Imagen url)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "INSERT INTO IMAGENES (IdArticulo, ImagenUrl) " +
+                    "VALUES (@idArticulo, @imagenUrl)"
+                    );
+                datos.setearParametro("@idArticulo", url.IdArticulo);
+                datos.setearParametro("@imagenUrl", url.UrlImagen);
 
                 datos.ejecutarAccion();
             }

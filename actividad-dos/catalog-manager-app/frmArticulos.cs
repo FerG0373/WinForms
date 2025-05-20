@@ -20,7 +20,7 @@ namespace catalog_manager_app
         {
             InitializeComponent();
         }
-        
+
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             cargarDatos();

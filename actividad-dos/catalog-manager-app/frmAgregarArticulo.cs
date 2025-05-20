@@ -15,6 +15,7 @@ namespace catalog_manager_app
     public partial class frmAgregarArticulo : Form
     {
         private Articulo articulo = null;
+        //private Imagen imagen = null;
 
         public frmAgregarArticulo()
         {
@@ -56,8 +57,7 @@ namespace catalog_manager_app
                 {
                     negocio.agregarArticulo(articulo);
                     MessageBox.Show("Artículo agregado con éxito.");
-                }                    
-
+                }
                 Close();
             }
             catch (Exception ex)
@@ -87,7 +87,7 @@ namespace catalog_manager_app
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
 
-                //Es un modificar artículo.
+                // Si NO es nulo significa que existe, por lo tanto, es un modificar artículo.
                 if (articulo != null)
                 {
                     txtCodigo.Text = articulo.Codigo;
@@ -96,7 +96,7 @@ namespace catalog_manager_app
                     cboCategoria.SelectedValue = articulo.Categoria.Id;
                     cboMarca.SelectedValue = articulo.Marca.Id;
                     txtPrecio.Text = articulo.Precio.ToString();
-                    //txtUrlImagen.Text = articulo.UrlImagen[0].UrlImagen;
+                    txtUrlImagen.Text = articulo.Imagen[0].UrlImagen;
                     cargarImagenes(articulo.Imagen);
                 }
             }
@@ -110,7 +110,7 @@ namespace catalog_manager_app
         {
             try
             {
-                //pbxArticulo.Load(imagenes[0].UrlImagen);
+                pbxArticulo.Load(imagenes[0].UrlImagen);
             }
             catch (Exception)
             {
@@ -124,7 +124,6 @@ namespace catalog_manager_app
             {
                 new Imagen { UrlImagen = txtUrlImagen.Text }
             };
-
             cargarImagenes(imagenes);
         }
 
