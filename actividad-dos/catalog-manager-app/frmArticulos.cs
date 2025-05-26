@@ -15,6 +15,7 @@ namespace catalog_manager_app
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulos;
+        private int indiceImagenActual = 0;
 
         public frmArticulos()
         {
@@ -53,7 +54,15 @@ namespace catalog_manager_app
         {
             try
             {
-                pbxArticulo.Load(imagenes[0].UrlImagen);
+                if(imagenes.Count > 0)
+                {
+                    indiceImagenActual = 0; // Reinicia el índice.
+                    pbxArticulo.Load(imagenes[indiceImagenActual].UrlImagen);
+                }
+                else
+                {
+                    throw new Exception("No hay imágenes disponibles.");
+                }
             }
             catch (Exception)
             {
@@ -90,6 +99,28 @@ namespace catalog_manager_app
                     seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
                     negocio.eliminarArticulo(seleccionado.Id);
                     cargarDatos();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnSiguienteImg_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                {
+                    indiceImagenActual++;
+                    // Si el índice supera el número de imágenes, vuelve al inicio.
+                    if (indiceImagenActual >= seleccionado.Imagen.Count)
+                    {
+                        indiceImagenActual = 0;
+                    }
+                    // Carga la imagen en el PictureBox.
+                    pbxArticulo.Load(seleccionado.Imagen[indiceImagenActual].UrlImagen);
                 }
             }
             catch (Exception ex)

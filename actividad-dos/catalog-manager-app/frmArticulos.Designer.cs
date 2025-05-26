@@ -115,6 +115,7 @@
             this.btnSiguienteImg.TabIndex = 4;
             this.btnSiguienteImg.Text = ">";
             this.btnSiguienteImg.UseVisualStyleBackColor = true;
+            this.btnSiguienteImg.Click += new System.EventHandler(this.btnSiguienteImg_Click);
             // 
             // btnAnteriorImg
             // 
