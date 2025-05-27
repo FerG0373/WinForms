@@ -29,12 +29,14 @@ namespace catalog_manager_app
 
         private void cargarDatos()
         {
+
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
             try
             {
-                ArticuloNegocio negocio = new ArticuloNegocio();
                 listaArticulos = negocio.listarArticulos();
                 dgvArticulos.DataSource = listaArticulos;
-                dgvArticulos.Columns["Id"].Visible = false;  // Oculta el campo Id en el Grid.
+                ocultarColumnas(); // Oculta las columnas innecesarias en el DataGridView.
                 cargarImagenes(listaArticulos[0].Imagen); // Lista de imágenes del primer artículo.
                 dgvArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Adapta el tamaño de las columnas al DataGridView
             }
@@ -44,10 +46,19 @@ namespace catalog_manager_app
             }
         }
 
+
+        private void ocultarColumnas()
+        {
+            if (dgvArticulos.Columns.Contains("Id"))
+                dgvArticulos.Columns["Id"].Visible = false; // Oculta el campo Id en el Grid.
+        }
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
-            Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagenes(articuloSeleccionado.Imagen);
+            if (dgvArticulos.CurrentRow != null && dgvArticulos.CurrentRow.DataBoundItem != null)
+            {
+                Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                cargarImagenes(articuloSeleccionado.Imagen);
+            }
         }
 
         private void cargarImagenes(List<Imagen> imagenes)
@@ -149,6 +160,29 @@ namespace catalog_manager_app
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            string filtro = txtFiltro.Text;
+
+            if (filtro != "")
+            {
+                listaFiltrada = listaArticulos.FindAll(x => 
+                x.Nombre.ToUpper().Contains(filtro.ToUpper()) || 
+                x.Codigo.ToUpper().Contains(filtro.ToUpper()) || 
+                (x.Marca != null && x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper())) || 
+                (x.Categoria != null && x.Categoria.Descripcion.ToUpper().Contains(filtro.ToUpper())));
+                dgvArticulos.DataSource = null; // Limpia el DataGridView antes de asignar la nueva fuente de datos.
+                dgvArticulos.DataSource = listaFiltrada;
+                ocultarColumnas(); // Oculta las columnas innecesarias.
+            }
+            else
+            {
+                cargarDatos(); // Si el filtro está vacío, recarga todos los artículos.
+            }
+
         }
     }
 }
