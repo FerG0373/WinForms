@@ -204,5 +204,20 @@ namespace negocio
                 throw ex;
             }
         }
+
+        public void eliminarArticuloLogico(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("UPDATE ARTICULOS SET Eliminado = 1 WHERE Id = @id;");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

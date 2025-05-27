@@ -87,25 +87,6 @@ namespace catalog_manager_app
             cargarDatos();
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            Articulo seleccionado;
-            try
-            {
-                DialogResult respuesta = MessageBox.Show("¿Estás seguro que querés eliminar este elemento?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(respuesta == DialogResult.Yes)
-                {
-                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                    negocio.eliminarArticulo(seleccionado.Id);
-                    cargarDatos();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
 
         private void btnSiguienteImg_Click(object sender, EventArgs e)
         {
@@ -121,6 +102,47 @@ namespace catalog_manager_app
                     }
                     // Carga la imagen en el PictureBox.
                     pbxArticulo.Load(seleccionado.Imagen[indiceImagenActual].UrlImagen);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void dgvArticulos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            eliminar(false);
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            eliminar(true);
+        }
+
+        private void eliminar (bool logico = false)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("¿Estás seguro que querés eliminar este elemento?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    if(logico)
+                    {
+                        negocio.eliminarArticuloLogico(seleccionado.Id);
+                    }
+                    else
+                    {
+                        negocio.eliminarArticulo(seleccionado.Id);
+                    }
+                    cargarDatos();
                 }
             }
             catch (Exception ex)
