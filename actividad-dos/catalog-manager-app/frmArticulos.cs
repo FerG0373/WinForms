@@ -217,6 +217,9 @@ namespace catalog_manager_app
             try
             {
                 string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltro.Text;
+                dgvArticulos.DataSource = negocio.filtrarArticulos(campo, criterio, filtro);
 
             }
             catch (Exception)
