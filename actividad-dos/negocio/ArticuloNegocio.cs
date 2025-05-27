@@ -219,5 +219,98 @@ namespace negocio
                 throw ex;
             }
         }
+
+        public List<Articulo> filtrarArticulos(string campo, string criterio, string filtro)
+        {
+            List<Articulo> listaFiltrada = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, (SELECT C.Descripcion FROM CATEGORIAS C WHERE C.Id = A.IdCategoria) Categoria, (SELECT M.Descripcion FROM MARCAS M WHERE M.Id = A.IdMarca) Marca, A.Precio, A.IdCategoria, A.IdMarca FROM ARTICULOS A WHERE ";
+                switch (campo)
+                {
+                    case "Nombre":
+                        switch (criterio)
+                        {
+                            case "Comienza con":
+                                consulta += "Nombre LIKE '" + filtro + "%' ";
+                                break;
+                            case "Contiene":
+                                consulta += "Nombre LIKE '%' + '" +filtro+ "' + '%'";
+                                break;
+                            case "Termina con":
+                                consulta += "Nombre LIKE '%" + filtro + "'";
+                                break;
+                            case "No contiene":
+                                consulta += "Nombre NOT LIKE '%' '" + filtro + "' '%'";
+                                break;
+                        }
+                        break;
+                    case "Código":
+                        switch (criterio)
+                        {
+                            case "Comienza con":
+                                consulta += "Codigo LIKE '" + filtro + "%' ";
+                                break;
+                            case "Contiene":
+                                consulta += "Codigo LIKE '%' + '" + filtro + "' + '%'";
+                                break;
+                            case "Termina con":
+                                consulta += "Codigo LIKE '%" + filtro + "'";
+                                break;
+                            case "No contiene":
+                                consulta += "Codigo NOT LIKE '%' '" + filtro + "' '%'";
+                                break;
+                        }
+                        break;
+                    case "Precio":
+                        switch (criterio)
+                        {
+                            case "Menor a":
+                                consulta += "Precio < " + filtro;
+                                break;
+                            case "Mayor a":
+                                consulta += "Precio > " + filtro;
+                                break;
+                            case "No igual a":
+                                consulta += "Precio <> " + filtro;
+                                break;
+                            default:
+                                consulta += "Precio = " + filtro;
+                                break;
+                        }
+                        break;
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Precio = Math.Round((decimal)datos.Lector["Precio"], 2);
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"]; // Para poder leer y precargar la categoría cuando voy a modificar.
+                    if (!(datos.Lector["Categoria"] is DBNull))
+                        aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    else
+                        aux.Categoria.Descripcion = "";
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"]; // Para poder leer y precargar la marca cuando voy a modificar.
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                }
+
+                return listaFiltrada;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

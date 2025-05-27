@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using dominio;
-using negocio;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace catalog_manager_app
 {
@@ -25,6 +26,12 @@ namespace catalog_manager_app
         private void frmArticulos_Load(object sender, EventArgs e)
         {
             cargarDatos();
+            cboCampo.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCriterio.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCampo.Items.Add("Nombre");
+            cboCampo.Items.Add("Codigo");
+            cboCampo.Items.Add("Precio");
+
         }
 
         private void cargarDatos()
@@ -162,33 +169,10 @@ namespace catalog_manager_app
             }
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            //List<Articulo> listaFiltrada;
-            //string filtro = txtFiltro.Text;
-
-            //if (filtro != "")
-            //{
-            //    listaFiltrada = listaArticulos.FindAll(x => 
-            //    x.Nombre.ToUpper().Contains(filtro.ToUpper()) || 
-            //    x.Codigo.ToUpper().Contains(filtro.ToUpper()) || 
-            //    (x.Marca != null && x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper())) || 
-            //    (x.Categoria != null && x.Categoria.Descripcion.ToUpper().Contains(filtro.ToUpper())));
-            //    dgvArticulos.DataSource = null; // Limpia el DataGridView antes de asignar la nueva fuente de datos.
-            //    dgvArticulos.DataSource = listaFiltrada;
-            //    ocultarColumnas(); // Oculta las columnas innecesarias.
-            //}
-            //else
-            //{
-            //    cargarDatos(); // Si el filtro está vacío, recarga todos los artículos.
-            //}
-
-        }
-
-        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        private void txtFiltroRapido_TextChanged(object sender, EventArgs e)
         {
             List<Articulo> listaFiltrada;
-            string filtro = txtFiltro.Text;
+            string filtro = txtFiltroRapido.Text;
 
             if (filtro.Length >= 2)
             {
@@ -204,6 +188,41 @@ namespace catalog_manager_app
             else
             {
                 cargarDatos(); // Si el filtro está vacío, recarga todos los artículos.
+            }
+        }
+
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string campoSeleccionado = cboCampo.SelectedItem.ToString();
+            if (campoSeleccionado == "Precio")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Igual a");
+                cboCriterio.Items.Add("Menor a");
+                cboCriterio.Items.Add("Mayor a");
+                cboCriterio.Items.Add("No igual a");
+            }
+            else 
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Contiene");
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("No contiene");
+            }
+        }
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                string campo = cboCampo.SelectedItem.ToString();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
