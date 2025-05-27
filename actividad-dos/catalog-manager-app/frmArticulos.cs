@@ -164,15 +164,38 @@ namespace catalog_manager_app
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            //List<Articulo> listaFiltrada;
+            //string filtro = txtFiltro.Text;
+
+            //if (filtro != "")
+            //{
+            //    listaFiltrada = listaArticulos.FindAll(x => 
+            //    x.Nombre.ToUpper().Contains(filtro.ToUpper()) || 
+            //    x.Codigo.ToUpper().Contains(filtro.ToUpper()) || 
+            //    (x.Marca != null && x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper())) || 
+            //    (x.Categoria != null && x.Categoria.Descripcion.ToUpper().Contains(filtro.ToUpper())));
+            //    dgvArticulos.DataSource = null; // Limpia el DataGridView antes de asignar la nueva fuente de datos.
+            //    dgvArticulos.DataSource = listaFiltrada;
+            //    ocultarColumnas(); // Oculta las columnas innecesarias.
+            //}
+            //else
+            //{
+            //    cargarDatos(); // Si el filtro está vacío, recarga todos los artículos.
+            //}
+
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
             List<Articulo> listaFiltrada;
             string filtro = txtFiltro.Text;
 
-            if (filtro != "")
+            if (filtro.Length >= 2)
             {
-                listaFiltrada = listaArticulos.FindAll(x => 
-                x.Nombre.ToUpper().Contains(filtro.ToUpper()) || 
-                x.Codigo.ToUpper().Contains(filtro.ToUpper()) || 
-                (x.Marca != null && x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper())) || 
+                listaFiltrada = listaArticulos.FindAll(x =>
+                x.Nombre.ToUpper().Contains(filtro.ToUpper()) ||
+                x.Codigo.ToUpper().Contains(filtro.ToUpper()) ||
+                (x.Marca != null && x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper())) ||
                 (x.Categoria != null && x.Categoria.Descripcion.ToUpper().Contains(filtro.ToUpper())));
                 dgvArticulos.DataSource = null; // Limpia el DataGridView antes de asignar la nueva fuente de datos.
                 dgvArticulos.DataSource = listaFiltrada;
@@ -182,7 +205,6 @@ namespace catalog_manager_app
             {
                 cargarDatos(); // Si el filtro está vacío, recarga todos los artículos.
             }
-
         }
     }
 }
