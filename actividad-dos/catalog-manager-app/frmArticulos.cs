@@ -211,11 +211,52 @@ namespace catalog_manager_app
                 cboCriterio.Items.Add("No contiene");
             }
         }
+
+        private bool validarCampos()
+        {
+            if (cboCampo.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un campo para filtrar.");
+                return false;
+            }
+            if (cboCriterio.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un criterio para filtrar.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtFiltro.Text))
+            {
+                MessageBox.Show("Debe ingresar un valor para filtrar.");
+                return false;
+            }
+            if (cboCampo.SelectedItem.ToString() == "Precio" && !soloNumeros(txtFiltro.Text))
+            {
+                MessageBox.Show("El filtro de precio debe contener solo números.");
+                return false;
+            }
+            return true;
+        }
+
+        private bool soloNumeros(string cadena)
+        {
+            foreach (char caracter in cadena )
+            {
+                if (!(char.IsNumber(caracter)))
+                        return false; // Si encuentra un carácter que no es un número, retorna false.
+            }
+            return true; 
+        }
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
+                if (!validarCampos())
+                {
+                    return; // Si la validación falla, no continúa con la búsqueda.
+                }
+
                 string campo = cboCampo.SelectedItem.ToString();
                 string criterio = cboCriterio.SelectedItem.ToString();
                 string filtro = txtFiltro.Text;
